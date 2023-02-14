@@ -1,0 +1,59 @@
+.janelaDeCadastro{
+  background-color: #ffffff;
+  border-radius: 5px;
+  border:#4473c5 solid 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.titulo {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: #4473c5;  
+}
+
+.titulo>h1{
+  color: #ffffff;
+  font-size: 1em;
+  font-weight: 500;
+  margin: 5px;
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0px;
+}
+
+.campoDePreenchimento {
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+}
+
+.campoDePreenchimento>label{
+  font-size: 0.9em;
+  font-weight: 300;
+  margin-left: 10px;
+}
+
+.campoDePreenchimento>input, .campoDePreenchimento>select{
+  border: #4473c5 solid 1px;
+  border-radius: 5px;
+  font-size: 1.1em;
+  font-family: sans-serif;
+  font-weight: 300;
+  padding: 5px;
+}
+
+.campoDePreenchimento>select{
+  border-radius: 5px;
+  appearance: none;
+  background-image: url(./assets/caret-down-outline.svg);
+  background-repeat: no-repeat;
+  background-position: calc(100% - 5px) center;
+  background-size: 1rem;
+}
