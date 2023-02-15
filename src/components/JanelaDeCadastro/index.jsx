@@ -24,6 +24,7 @@ export default function JanelaDeCadastro() {
       estado: "",
       cidade: ""
     })
+    setEstadoNaoSelecionado(true);
   }
 
   //Funções lidar
