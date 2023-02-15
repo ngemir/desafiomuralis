@@ -32,6 +32,7 @@
   display: flex;
   flex-direction: column;
   margin: 5px;
+  width: 250px;
 }
 
 .campoDePreenchimento>label{
@@ -43,17 +44,66 @@
 .campoDePreenchimento>input, .campoDePreenchimento>select{
   border: #4473c5 solid 1px;
   border-radius: 5px;
-  font-size: 1.1em;
+  font-size: 0.9em;
   font-family: sans-serif;
   font-weight: 300;
   padding: 5px;
 }
 
-.campoDePreenchimento>select{
+/* Esconte seta padrão */
+.seta>select{
   border-radius: 5px;
   appearance: none;
-  background-image: url(./assets/caret-down-outline.svg);
-  background-repeat: no-repeat;
-  background-position: calc(100% - 5px) center;
-  background-size: 1rem;
+  width: 100%;
+  padding: 5px;
+}
+
+/* Ajeita a seta */
+.seta {
+  position: relative;
+  max-width: 400px;
+}
+
+/* Coloca seta por fora */
+.seta::after{
+  content: url('./assets/caret-down-outline.svg');
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 30px;
+  border-radius: 5px;
+  pointer-events: none;
+}
+
+.seta, .seta::after, .seta select {
+  box-sizing: border-box;
+  height: 40px;
+}
+
+.campoDosBotoes{
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+}
+
+.botaoVoltar {
+  background-color: #ffc100;
+  color: #ffffff;
+  border-radius: 5px;
+  font-size: 0.7em;
+  font-family: sans-serif;
+  border: #b49113 solid 1px;
+  align-self: center;
+  padding: 2px 20px;
+}
+
+.botaoGravar {
+  background-color: #6fad48;
+  color: #ffffff;
+  border-radius: 5px;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  font-weight: 500;
+  border: #5e7f44 solid 1px;
+  padding: 5px 20px;
 }

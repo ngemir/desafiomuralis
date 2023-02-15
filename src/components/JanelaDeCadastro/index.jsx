@@ -1,10 +1,12 @@
 import React, {useState} from 'react';
 import './index.css';
 
+
+
 //Renderização
 export default function JanelaDeCadastro() {
   
-  // Manipulação de Dados
+  // Criação de Estados
   const [ingressante, setIngressante] = useState({
     nome: "",
     curso: "",
@@ -13,7 +15,18 @@ export default function JanelaDeCadastro() {
   });
   
   const [estadoNaoSelecionado, setEstadoNaoSelecionado] = useState(true);
+  
+  //ação do botão Voltar
+  function limparCampos(){
+    setIngressante({
+      nome: "",
+      curso: "",
+      estado: "",
+      cidade: ""
+    })
+  }
 
+  //Funções lidar
   function lidarInputNome(nome){
     let valorNovo = {};
     valorNovo = {nome: nome.target.value};
@@ -43,12 +56,16 @@ export default function JanelaDeCadastro() {
     setIngressante(ingressante => ({...ingressante, cidade: cidade.target.value}));
   }
 
-  //Listar Cidade
+  // fim das funções lidar
+
+  //Função Listar
   function listaCidadePadrao(){
     return (
-      <select name="inputCidade" id="cidade" disabled={estadoNaoSelecionado}>
-        <option value="">Selecione antes o Estado</option>
-      </select>
+      <div className='seta'>
+        <select name="inputCidade" id="cidade" disabled={estadoNaoSelecionado}>
+          <option value="">Selecione antes o Estado</option>
+        </select>
+      </div>
     )
   }
 
@@ -56,38 +73,48 @@ export default function JanelaDeCadastro() {
     switch (estado){
       case "SP":
         return (
-          <select name="inputCidade" id="cidade" disabled={estadoNaoSelecionado} onChange={(cidadeEscolhido) => lidarInputCidade(cidadeEscolhido)}>
-            <option value='MogiDasCruzes'>Mogi das Cruzes</option>
-            <option value='Suzano'>Suzano</option>
-            <option value='Poa'>Poá</option>
-            <option value='Guararema'>Guararema</option>
-          </select>
+          <div className="seta">
+            <select name="inputCidade" id="cidade" disabled={estadoNaoSelecionado} onChange={(cidadeEscolhido) => lidarInputCidade(cidadeEscolhido)}>
+              <option value='MogiDasCruzes'>Mogi das Cruzes</option>
+              <option value='Suzano'>Suzano</option>
+              <option value='Poa'>Poá</option>
+              <option value='Guararema'>Guararema</option>
+            </select>
+          </div>
         );
       case "RJ":
         return (
-          <select name="inputCidade" id="cidade" disabled={estadoNaoSelecionado} onChange={(cidadeEscolhido) => lidarInputCidade(cidadeEscolhido)}>
-            <option value="AngraDosReis">Angra dos Reis</option>
-            <option value="Niteroi">Niterói</option>
-            <option value="Itaborai">Itaboraí</option>
-          </select>
+          <div className="seta">
+            <select name="inputCidade" id="cidade" disabled={estadoNaoSelecionado} onChange={(cidadeEscolhido) => lidarInputCidade(cidadeEscolhido)}>
+              <option value="AngraDosReis">Angra dos Reis</option>
+              <option value="Niteroi">Niterói</option>
+              <option value="Itaborai">Itaboraí</option>
+            </select>
+          </div>
         );
       case "MG":
         return (
-          <select name="inputCidade" id="cidade" disabled={estadoNaoSelecionado} onChange={(cidadeEscolhido) => lidarInputCidade(cidadeEscolhido)}>
-            <option value="BeloHorizonte">Belo Horizonte</option>
-            <option value="MonteAzul">Monte Azul</option>
-            <option value="Muzambinho">Muzambinho</option>
-          </select>
+          <div className="seta">
+            <select name="inputCidade" id="cidade" disabled={estadoNaoSelecionado} onChange={(cidadeEscolhido) => lidarInputCidade(cidadeEscolhido)}>
+              <option value="BeloHorizonte">Belo Horizonte</option>
+              <option value="MonteAzul">Monte Azul</option>
+              <option value="Muzambinho">Muzambinho</option>
+            </select>
+          </div>
         );
       default:
         return (
-          <select name="inputCidade" id="cidade" disabled={estadoNaoSelecionado} onChange={(cidadeEscolhido) => lidarInputCidade(cidadeEscolhido)}>
-            <option value="">Selecione a cidade</option>
-          </select>
+          <div className="seta">
+            <select name="inputCidade" id="cidade" disabled={estadoNaoSelecionado} onChange={(cidadeEscolhido) => lidarInputCidade(cidadeEscolhido)}>
+              <option value="">Selecione a cidade</option>
+            </select>
+          </div>
         );
     }
   }
   
+  //Fim da função Listar
+
   //Interface
   return (
     <div className='janelaDeCadastro'>
@@ -101,29 +128,34 @@ export default function JanelaDeCadastro() {
         </div>
         <div className='campoDePreenchimento'>
           <label htmlFor="curso">Curso</label>
-          <select name="inputCurso" id="curso" onChange={(cursoEscolhido) => lidarInputCurso(cursoEscolhido)}>
-            <option value="" defaultChecked>Escolha seu Curso</option>
-            <option value="Matematica">Matemática</option>
-            <option value="Letras">Letras</option>
-            <option value="Geografia">Geografia</option>
-          </select>
+          <div className="seta">
+            <select name="inputCurso" id="curso" onChange={(cursoEscolhido) => lidarInputCurso(cursoEscolhido)}>
+              <option value="" defaultChecked>Escolha seu Curso</option>
+              
+              <option value="Matematica">Matemática</option>
+              <option value="Letras">Letras</option>
+              <option value="Geografia">Geografia</option>
+            </select>
+          </div>
         </div>
         <div className='campoDePreenchimento'>
           <label htmlFor="estado">Estado</label>
-          <select name="inputEstado" id="estado" onChange={(estadoEscolhido) => lidarInputEstado(estadoEscolhido)}>
-            <option value="" defaultChecked>Escolha seu Estado</option>
-            <option value="SP">São Paulo</option>
-            <option value="RJ">Rio de Janeiro</option>
-            <option value="MG">MinasGerais</option>
-          </select>
+          <div className="seta">  
+            <select name="inputEstado" id="estado" onChange={(estadoEscolhido) => lidarInputEstado(estadoEscolhido)}>
+              <option value="" defaultChecked>Escolha seu Estado</option>
+              <option value="SP">São Paulo</option>
+              <option value="RJ">Rio de Janeiro</option>
+              <option value="MG">MinasGerais</option>
+            </select>
+          </div>
         </div>
         <div className='campoDePreenchimento'>
           <label htmlFor="cidade">Cidades</label>
           {estadoNaoSelecionado ? listaCidadePadrao() : listarCidade(ingressante.estado)}
         </div>
-        <div className='campoDosBotões'>
-          <button className='botaoVoltar'>Voltar</button>
-          <input type="submit" value="Gravar" className='botaoGravar' />
+        <div className='campoDosBotoes'>
+          <button type="button" className='botaoVoltar' onClick={limparCampos}>Voltar</button>
+          <button type="submit" className='botaoGravar'>Gravar</button>
         </div>
       </form>
       <pre>

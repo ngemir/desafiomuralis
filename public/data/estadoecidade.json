@@ -1,0 +1,26 @@
+{
+  "Estados":{
+    "SP": {
+      "cidades": [
+        "Mogi das Cruzes",
+        "Suzano",
+        "Poá",
+        "Guararema"
+      ]
+    },
+    "RJ": {
+      "cidades": [
+        "Angra dos Reis",
+        "Niterói",
+        "Itaboraí"
+      ]
+    },
+    "MG": {
+      "cidades": [
+        "Belo Horizonte",
+        "Monte Azul",
+        "Muzambinho"
+      ]
+    }
+  }
+}

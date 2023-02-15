@@ -1,1 +1,65 @@
-<svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><title>Caret Down</title><path d="M98 190.06l139.78 163.12a24 24 0 0036.44 0L414 190.06c13.34-15.57 2.28-39.62-18.22-39.62h-279.6c-20.5 0-31.56 24.05-18.18 39.62z"/></svg>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   class="ionicon"
+   viewBox="0 0 512 512"
+   version="1.1"
+   id="svg16"
+   sodipodi:docname="caret-down-outline.svg"
+   inkscape:version="1.2.1 (9c6d41e410, 2022-07-14)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs20" />
+  <sodipodi:namedview
+     id="namedview18"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     showgrid="true"
+     inkscape:zoom="1.1559539"
+     inkscape:cx="140.144"
+     inkscape:cy="247.41471"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg16">
+    <inkscape:grid
+       type="xygrid"
+       id="grid1332" />
+  </sodipodi:namedview>
+  <title
+     id="title12">Caret Down</title>
+  <rect
+     style="fill:#4d6ec0;fill-opacity:1;stroke:none;stroke-opacity:1"
+     id="rect1063"
+     width="512.61176"
+     height="513.83514"
+     x="0"
+     y="0"
+     ry="90" />
+  <path
+     sodipodi:type="star"
+     style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-opacity:1"
+     id="path1266"
+     inkscape:flatsided="false"
+     sodipodi:sides="3"
+     sodipodi:cx="237.89877"
+     sodipodi:cy="209.35092"
+     sodipodi:r1="220.52071"
+     sodipodi:r2="110.26035"
+     sodipodi:arg1="-0.52359878"
+     sodipodi:arg2="0.52359878"
+     inkscape:rounded="0"
+     inkscape:randomized="0"
+     d="M 428.87531,99.090568 333.38704,264.4811 237.89877,429.87163 142.41051,264.4811 46.922239,99.090569 l 190.976531,0 z"
+     inkscape:transform-center-y="14.903654"
+     transform="matrix(0.69401176,0,0,0.69401176,95.490484,83.838494)" />
+</svg>
