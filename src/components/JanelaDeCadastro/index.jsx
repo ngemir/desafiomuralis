@@ -22,6 +22,7 @@ export default function JanelaDeCadastro() {
       estado: "",
       cidade: ""
     })
+    
     setEstadoNaoSelecionado(true);
   }
 
@@ -132,7 +133,6 @@ export default function JanelaDeCadastro() {
         setCidades(ci.cidades);
       });
   }
-  let impedeLoop = '';
   useEffect(()=>{
     listarCidades()
   },[ingressante])
@@ -141,7 +141,23 @@ export default function JanelaDeCadastro() {
   
   //Fim da listagem ↑ 
 
-  
+  //Enviar Registro para alert
+  function enviar(event){
+    event.preventDefault();
+    let nomeInserido = event.target[0].value;
+    let cursoSelecionado = event.target[1].value;
+    let estadoSelecionado = event.target[2].value;
+    let cidadeSelecionado = event.target[3].value;
+    
+    let dadoEnviado = {
+      nome: nomeInserido,
+      curso: cursoSelecionado,
+      estado: estadoSelecionado,
+      cidade: cidadeSelecionado
+    }
+
+    alert(JSON.stringify(dadoEnviado));
+  }
 
   //Interface
   return (
@@ -149,15 +165,15 @@ export default function JanelaDeCadastro() {
       <div className='titulo'>
         <h1>Cadastro de Ingressantes</h1>
       </div>
-      <form className='formulario'>
+      <form className='formulario' onSubmit={enviar}>
         <div className='campoDePreenchimento'>
           <label htmlFor="nome">Nome</label>
-          <input type="text" name="inputNome" id="nome" onChange={(nomeInserido) => lidarInputNome(nomeInserido)}/>
+          <input type="text" value={ingressante.nome} name="inputNome" id="nome" onChange={(nomeInserido) => lidarInputNome(nomeInserido)}/>
         </div>
         <div className='campoDePreenchimento'>
           <label htmlFor="curso">Curso</label>
           <div className="seta">
-            <select name="inputCurso" id="curso" onChange={(cursoEscolhido) => lidarInputCurso(cursoEscolhido)}>
+            <select name="inputCurso" value={ingressante.curso} id="curso" onChange={(cursoEscolhido) => lidarInputCurso(cursoEscolhido)}>
               <option value="" defaultChecked>Escolha seu Curso</option>
               {cursos.map((item) => <option key={item} value={item}>{item}</option>)}
             </select>
@@ -166,7 +182,7 @@ export default function JanelaDeCadastro() {
         <div className='campoDePreenchimento'>
           <label htmlFor="estado">Estado</label>
           <div className="seta">  
-            <select name="inputEstado" id="estado" onChange={(estadoEscolhido) => lidarInputEstado(estadoEscolhido)}>
+            <select name="inputEstado" value={ingressante.estado} id="estado" onChange={(estadoEscolhido) => lidarInputEstado(estadoEscolhido)}>
               <option value="" defaultChecked>Escolha seu Estado</option>
               {estados.map(estado => <option key={estado} value={estado}>{estado}</option> )}
             </select>
@@ -175,7 +191,8 @@ export default function JanelaDeCadastro() {
         <div className='campoDePreenchimento'>
           <label htmlFor="cidade">Cidades</label>
           <div className="seta">
-            <select name="inputCidade" id="cidade" disabled={estadoNaoSelecionado} onChange={(cidadeEscolhido) => lidarInputCidade(cidadeEscolhido)}>
+            <select name="inputCidade" value={ingressante.cidade} id="cidade" disabled={estadoNaoSelecionado} onChange={(cidadeEscolhido) => lidarInputCidade(cidadeEscolhido)}>
+              <option value="" defaultChecked>Escolha sua Cidade</option>
               {cidades.map(cidade => <option key={cidade} value={cidade}>{cidade}</option>)}
             </select>
           </div>
