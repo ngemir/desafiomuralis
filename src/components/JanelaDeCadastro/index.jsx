@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './index.css';
 
 
@@ -13,9 +13,7 @@ export default function JanelaDeCadastro() {
     estado: "",
     cidade: ""
   });
-  
-  const [estadoNaoSelecionado, setEstadoNaoSelecionado] = useState(true);
-  
+
   //ação do botão Voltar
   function limparCampos(){
     setIngressante({
@@ -27,7 +25,7 @@ export default function JanelaDeCadastro() {
     setEstadoNaoSelecionado(true);
   }
 
-  //Funções lidar
+  //Funções para lidar com os dados dos setStates do dado de Registro
   function lidarInputNome(nome){
     let valorNovo = {};
     valorNovo = {nome: nome.target.value};
@@ -59,62 +57,91 @@ export default function JanelaDeCadastro() {
 
   // fim das funções lidar
 
-  //Função Listar
-  function listaCidadePadrao(){
-    return (
-      <div className='seta'>
-        <select name="inputCidade" id="cidade" disabled={estadoNaoSelecionado}>
-          <option value="">Selecione antes o Estado</option>
-        </select>
-      </div>
-    )
-  }
+  //Setor de listagem ↓
 
-  function listarCidade(estado){
-    switch (estado){
-      case "SP":
-        return (
-          <div className="seta">
-            <select name="inputCidade" id="cidade" disabled={estadoNaoSelecionado} onChange={(cidadeEscolhido) => lidarInputCidade(cidadeEscolhido)}>
-              <option value='MogiDasCruzes'>Mogi das Cruzes</option>
-              <option value='Suzano'>Suzano</option>
-              <option value='Poa'>Poá</option>
-              <option value='Guararema'>Guararema</option>
-            </select>
-          </div>
-        );
-      case "RJ":
-        return (
-          <div className="seta">
-            <select name="inputCidade" id="cidade" disabled={estadoNaoSelecionado} onChange={(cidadeEscolhido) => lidarInputCidade(cidadeEscolhido)}>
-              <option value="AngraDosReis">Angra dos Reis</option>
-              <option value="Niteroi">Niterói</option>
-              <option value="Itaborai">Itaboraí</option>
-            </select>
-          </div>
-        );
-      case "MG":
-        return (
-          <div className="seta">
-            <select name="inputCidade" id="cidade" disabled={estadoNaoSelecionado} onChange={(cidadeEscolhido) => lidarInputCidade(cidadeEscolhido)}>
-              <option value="BeloHorizonte">Belo Horizonte</option>
-              <option value="MonteAzul">Monte Azul</option>
-              <option value="Muzambinho">Muzambinho</option>
-            </select>
-          </div>
-        );
-      default:
-        return (
-          <div className="seta">
-            <select name="inputCidade" id="cidade" disabled={estadoNaoSelecionado} onChange={(cidadeEscolhido) => lidarInputCidade(cidadeEscolhido)}>
-              <option value="">Selecione a cidade</option>
-            </select>
-          </div>
-        );
+  //Tratamento dos Cursos existente no JSON
+  const [cursos, setCursos] = useState([]);
+
+  const listarCursos=()=>{
+    fetch('./data/cursos.json'
+    ,{
+      headers : { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+       }
     }
+    )
+      .then(function(response){
+        return response.json();
+      })
+      .then(function(dados) {
+        setCursos(dados.Cursos);
+      });
   }
+  useEffect(()=>{
+    listarCursos()
+  },[])
   
-  //Fim da função Listar
+
+  //Fim do tratamento da lista Curso
+
+  //Tratamento da Lista de Estado
+  const [estadoNaoSelecionado, setEstadoNaoSelecionado] = useState(true);
+  const [estados, setEstados] = useState([]);
+
+  const listarEstados=()=>{
+    fetch('./data/estadoecidade.json'
+    ,{
+      headers : { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+       }
+    }
+    )
+      .then(function(response){
+        return response.json();
+      })
+      .then(function(dados) {
+        let es = Object.keys(dados.Estados)
+        setEstados(es);
+      });
+  }
+  useEffect(()=>{
+    listarEstados()
+  },[])
+  
+
+  //Tratamento da lista de cidades de acordo com o Estado selecionado
+  const [cidades, setCidades] = useState([]);
+  
+  const listarCidades=()=>{
+    fetch('./data/estadoecidade.json'
+    ,{
+      headers : { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+       }
+    }
+    )
+      .then(function(response){
+        return response.json();
+      })
+      .then(function(dados) {
+        const estadoSelecionado = ingressante.estado
+        const ci = dados.Estados[estadoSelecionado]
+        setCidades(ci.cidades);
+      });
+  }
+  let impedeLoop = '';
+  useEffect(()=>{
+    listarCidades()
+  },[ingressante])
+
+  // Fim do tratamento da Lista de Estado
+  
+  //Fim da listagem ↑ 
+
+  
 
   //Interface
   return (
@@ -132,10 +159,7 @@ export default function JanelaDeCadastro() {
           <div className="seta">
             <select name="inputCurso" id="curso" onChange={(cursoEscolhido) => lidarInputCurso(cursoEscolhido)}>
               <option value="" defaultChecked>Escolha seu Curso</option>
-              
-              <option value="Matematica">Matemática</option>
-              <option value="Letras">Letras</option>
-              <option value="Geografia">Geografia</option>
+              {cursos.map((item) => <option key={item} value={item}>{item}</option>)}
             </select>
           </div>
         </div>
@@ -144,24 +168,23 @@ export default function JanelaDeCadastro() {
           <div className="seta">  
             <select name="inputEstado" id="estado" onChange={(estadoEscolhido) => lidarInputEstado(estadoEscolhido)}>
               <option value="" defaultChecked>Escolha seu Estado</option>
-              <option value="SP">São Paulo</option>
-              <option value="RJ">Rio de Janeiro</option>
-              <option value="MG">MinasGerais</option>
+              {estados.map(estado => <option key={estado} value={estado}>{estado}</option> )}
             </select>
           </div>
         </div>
         <div className='campoDePreenchimento'>
           <label htmlFor="cidade">Cidades</label>
-          {estadoNaoSelecionado ? listaCidadePadrao() : listarCidade(ingressante.estado)}
+          <div className="seta">
+            <select name="inputCidade" id="cidade" disabled={estadoNaoSelecionado} onChange={(cidadeEscolhido) => lidarInputCidade(cidadeEscolhido)}>
+              {cidades.map(cidade => <option key={cidade} value={cidade}>{cidade}</option>)}
+            </select>
+          </div>
         </div>
         <div className='campoDosBotoes'>
           <button type="button" className='botaoVoltar' onClick={limparCampos}>Voltar</button>
           <button type="submit" className='botaoGravar'>Gravar</button>
         </div>
       </form>
-      <pre>
-        {JSON.stringify(ingressante,null,2)}
-      </pre>
     </div>
   )
 }
