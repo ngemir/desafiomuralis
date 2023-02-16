@@ -107,3 +107,8 @@
   border: #5e7f44 solid 1px;
   padding: 5px 20px;
 }
+
+.msgErro {
+  color: red;
+  font-size: 12px;
+}
